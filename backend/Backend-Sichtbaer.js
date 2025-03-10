@@ -4,6 +4,9 @@ const connectDB = require("./db");
 
 const app = express();
 
+app.use("/api/auth", authRoutes);
+
+
 // Middleware
 app.use(cors());
 app.use(express.json()); // Falls du JSON-Daten empfangen willst
