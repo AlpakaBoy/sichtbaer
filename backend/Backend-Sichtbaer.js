@@ -1,3 +1,25 @@
+const express = require("express");
+const cors = require("cors");
+const connectDB = require("./db");
+
+const app = express();
+
+// Middleware
+app.use(cors());
+app.use(express.json()); // Falls du JSON-Daten empfangen willst
+
+// MongoDB verbinden
+connectDB();
+
+app.get("/", (req, res) => {
+    res.send("Sichtbär Backend läuft! 🐻");
+});
+
+// Server starten
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`🚀 Server läuft auf Port ${PORT}`);
+});
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://alpaycenkozer:p19ANvvhGDB5Mi3L@sichtbaercluster.maxik.mongodb.net/?retryWrites=true&w=majority&appName=sichtbaercluster";
