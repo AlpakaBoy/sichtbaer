@@ -1,3 +1,28 @@
+require('dotenv').config(); // Load environment variables from .env file
+
+const express = require('express');
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+
+const app = express();
+
+const PORT = process.env.PORT || 5000;
+const MONGO_URI = process.env.MONGO_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
+
+// Use the environment variables in your code
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.log('Error connecting to MongoDB:', err));
+
+// Example of using the JWT_SECRET for signing a JWT token
+const token = jwt.sign({ userId: 'example' }, JWT_SECRET, { expiresIn: '1h' });
+console.log('JWT Token:', token);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./db");
